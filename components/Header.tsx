@@ -46,7 +46,7 @@ const Header = () => {
                   : "")}
             </p>
           ) : (
-            <Button asChild>
+            <Button asChild className="flex items-center justify-center gap-2">
               <Link href={user ? "/profile" : "/login"}>
                 {user ? (
                   <>

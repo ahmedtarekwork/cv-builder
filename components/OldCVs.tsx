@@ -68,8 +68,8 @@ const OldCVs = () => {
     if (user) {
       const colRef = query(
         collection(db, "CVs"),
-        where("userId", "==", user.id)
-        // orderBy("createdAt", "desc")
+        where("userId", "==", user.id),
+        orderBy("createdAt", "desc")
       );
 
       onSnapshot(colRef, (templates) => {
@@ -125,7 +125,12 @@ const OldCVs = () => {
                 <div className="flex justify-between flex-wrap gap-2 [&>*]:flex-1 [&>*]:!py-6">
                   <Button asChild>
                     <PDFDownloadLink
-                      document={<DownloadTemplate {...data} />}
+                      document={
+                        <DownloadTemplate
+                          {...data}
+                          domain={window.location.origin}
+                        />
+                      }
                       fileName="CV.pdf"
                     >
                       {({ loading }) => {
