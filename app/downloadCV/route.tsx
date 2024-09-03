@@ -25,7 +25,7 @@ const getCVData = async (id: string) => {
   };
 };
 
-export async function GET({ nextUrl }: NextRequest) {
+export async function GET({ nextUrl, url }: NextRequest) {
   const { CVID } = Object.fromEntries(nextUrl.searchParams.entries());
 
   const { templateIndex, ...data } = await getCVData(CVID);
@@ -39,7 +39,9 @@ export async function GET({ nextUrl }: NextRequest) {
   const SelectedTemplate =
     templates[finalTemplateIndex as keyof typeof templates].DownloadTemplate;
 
-  const stream = await renderToStream(<SelectedTemplate {...data} />);
+  const stream = await renderToStream(
+    <SelectedTemplate {...data} domain={new URL(url).origin} />
+  );
 
   return new NextResponse(stream as unknown as ReadableStream);
 }

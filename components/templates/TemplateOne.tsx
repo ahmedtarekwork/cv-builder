@@ -246,6 +246,7 @@ const TheTemplate = ({
             width={110}
             height={110}
             className="mx-auto"
+            style={{ aspectRatio: 1, objectFit: "contain" }}
           />
         )}
 

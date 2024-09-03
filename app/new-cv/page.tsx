@@ -116,6 +116,7 @@ const NewCVPage = () => {
     clearErrors,
     getValues,
     setValue,
+    reset,
     formState: { errors },
   } = useForm<InputsTypes>({
     defaultValues: {
@@ -123,22 +124,6 @@ const NewCVPage = () => {
       skills: [initSkill],
       jobs: [initJob],
       projects: [initProject],
-      name: "ahmed",
-      jobTitle: "frontend web dev",
-      phoneNumber: "01284059026",
-      location: "Egypt",
-      websiteLink: "https://ahmed-profile.vercel.app",
-      email: "ahmedellabana7@gmail.com",
-      linkedinLink: "www.linkedin.com/in/ahmed-tarek-099618209",
-      githubLink: "https://github.com/ahmedtarekwork",
-      about: `I’m Ahmed Tarek, a passionate Frontend React.js Web Developer from Alexandria, Egypt
-I dedicated to continuous learning and applying new
-technologies to ensure the success of my future
-projects. My commitment to my craft extends beyond
-my studies as I strive to bring innovation and quality
-to the forefront of my work.`,
-      education:
-        "I’m still student at moharam-bik industrial school in department of solar panels at the 4th year.",
     },
   });
 
@@ -329,7 +314,7 @@ to the forefront of my work.`,
         ? templateId
         : (res as Awaited<ReturnType<typeof addDoc>>).id;
 
-      window.open(`/downloadCV?templateIndex=${template}&CVID=${id}`, "_blank");
+      window.open(`/downloadCV?CVID=${id}`, "_blank");
       router.push("/profile");
     } catch (error) {
       toast.error("something went wrong while downloading your CV");
@@ -704,24 +689,24 @@ to the forefront of my work.`,
         </div>
 
         <div className="flex gap-2 [&>*]:flex-1 flex-wrap pb-2">
-          {editMode && (
-            <Button
-              onClick={() => {
+          <Button
+            onClick={() => {
+              if (editMode.current) {
                 if (initData) {
-                  Object.entries(initData).forEach(([key, value]) => {
-                    if (key === "jobs" && !value.length) return;
-                    setValue(key as keyof TemplateDataType, value);
-                  });
+                  const finalData = JSON.parse(JSON.stringify({ ...initData }));
+                  if (!finalData.jobs.length) finalData.jobs = [initJob];
+                  reset(finalData);
+
                   setImage(null);
                   addImageRef.current?.setShowImg(true);
                 }
-              }}
-              disabled={isLoading}
-              type="button"
-            >
-              Reset
-            </Button>
-          )}
+              } else reset();
+            }}
+            disabled={isLoading}
+            type="button"
+          >
+            Reset
+          </Button>
 
           <Dialog>
             <Button

@@ -43,7 +43,8 @@ export const DownloadTemplate = ({
   websiteLink,
   BehanceLink,
   githubLink,
-}: NonNullable<TheTemplateProps["templateData"]>) => {
+  domain,
+}: NonNullable<TheTemplateProps["templateData"]> & { domain: string }) => {
   Font.register({
     family: "Open Sans",
     fonts: [
@@ -108,21 +109,21 @@ export const DownloadTemplate = ({
 
           <View style={{ display: "flex", flexDirection: "column", gap: 7 }}>
             <View style={styles.iconHolder}>
-              <PDFImage style={styles.icon} src="./public/email.png" />
+              <PDFImage style={styles.icon} src={`${domain}/email.png`} />
               <Text>{email}</Text>
             </View>
             <View style={styles.iconHolder}>
-              <PDFImage style={styles.icon} src="./public/phone.png" />
+              <PDFImage style={styles.icon} src={`${domain}/phone.png`} />
               <Text>{phoneNumber}</Text>
             </View>
             <View style={styles.iconHolder}>
-              <PDFImage style={styles.icon} src="./public/location.png" />
+              <PDFImage style={styles.icon} src={`${domain}/location.png`} />
               <Text>{location}</Text>
             </View>
 
             <Link style={{ color: "#64748b" }}>
               <View style={styles.iconHolder}>
-                <PDFImage style={styles.icon} src="./public/linkedin.png" />
+                <PDFImage style={styles.icon} src={`${domain}/linkedin.png`} />
                 <Text>{linkedinLink}</Text>
               </View>
             </Link>
@@ -130,7 +131,7 @@ export const DownloadTemplate = ({
             {!!websiteLink && (
               <Link style={{ color: "#64748b" }}>
                 <View style={styles.iconHolder}>
-                  <PDFImage style={styles.icon} src="./public/www.png" />
+                  <PDFImage style={styles.icon} src={`${domain}/www.png`} />
                   <Text>{websiteLink}</Text>
                 </View>
               </Link>
@@ -139,7 +140,7 @@ export const DownloadTemplate = ({
             {!!githubLink && (
               <Link style={{ color: "#64748b" }}>
                 <View style={styles.iconHolder}>
-                  <PDFImage style={styles.icon} src="./public/github.png" />
+                  <PDFImage style={styles.icon} src={`${domain}/github.png`} />
                   <Text>{githubLink}</Text>
                 </View>
               </Link>
@@ -147,7 +148,7 @@ export const DownloadTemplate = ({
             {!!BehanceLink && (
               <Link style={{ color: "#64748b" }}>
                 <View style={styles.iconHolder}>
-                  <PDFImage style={styles.icon} src="./public/behance.png" />
+                  <PDFImage style={styles.icon} src={`${domain}/behance.png`} />
                   <Text>{BehanceLink}</Text>
                 </View>
               </Link>
