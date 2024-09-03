@@ -26,16 +26,16 @@ export const metadata: Metadata = {
     url: "https://github.com/ahmedtarekwork",
   },
   openGraph: {
-    url: process.env.NEXT_PUBLIC_DOMAIN,
+    url: "https://ahmed-cv-builder.vercel.app/",
     type: "website",
     title: "CV Builder, build your dream cv",
     description: "this web application give ability to build professional cv",
-    images: [`${process.env.NEXT_PUBLIC_DOMAIN}/og_img.webp`],
+    images: ["https://ahmed-cv-builder.vercel.app/og_img.webp"],
     siteName: "CV Builder",
   },
   twitter: {
     description: "this web application give ability to build professional cv",
-    images: [`${process.env.NEXT_PUBLIC_DOMAIN}/og_img.webp`],
+    images: ["https://ahmed-cv-builder.vercel.app/og_img.webp"],
     title: "CV Builder, build your dream cv",
     card: "summary_large_image",
   },
@@ -49,12 +49,20 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        <meta
+          name="google-site-verification"
+          content="mRJBiFAKZclxHqVNzE3XcVND8jU8zoZUfY4Z-kYZmQw"
+        />
+
         {/* Twitter Meta Tags */}
         <meta
           property="twitter:domain"
-          content={process.env.NEXT_PUBLIC_DOMAIN}
+          content="https://ahmed-cv-builder.vercel.app/"
         />
-        <meta property="twitter:url" content={process.env.NEXT_PUBLIC_DOMAIN} />
+        <meta
+          property="twitter:url"
+          content="https://ahmed-cv-builder.vercel.app/"
+        />
       </head>
 
       <UserContext>
