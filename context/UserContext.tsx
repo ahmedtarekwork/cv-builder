@@ -15,6 +15,8 @@ import {
   type SetStateAction,
 } from "react";
 
+import LoadingScreen from "@/components/layout/LoadingScreen";
+
 // firebase
 import { auth } from "../config/firebaseConfig";
 import { onAuthStateChanged } from "firebase/auth";
@@ -49,6 +51,8 @@ const UserContext = ({ children }: { children: ReactNode }) => {
         }
       } else setUser(null);
     });
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -75,15 +79,7 @@ const UserContext = ({ children }: { children: ReactNode }) => {
         setUser,
       }}
     >
-      {isLoading ? (
-        <body className="min-h-screen flex justify-center items-center">
-          <h1 className="text-primary font-bold" style={{ fontSize: 36 }}>
-            Loading...
-          </h1>
-        </body>
-      ) : (
-        children
-      )}
+      {isLoading ? <LoadingScreen /> : children}
     </userContext.Provider>
   );
 };

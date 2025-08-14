@@ -5,15 +5,6 @@ import { Inter } from "next/font/google";
 // styles
 import "./globals.css";
 
-// context
-import UserContext from "@/context/UserContext";
-
-// components
-import Header from "@/components/Header";
-
-// utils
-import { Toaster } from "sonner";
-
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -65,15 +56,9 @@ export default function RootLayout({
         />
       </head>
 
-      <UserContext>
-        <body className={inter.className}>
-          <div className="min-h-screen flex flex-col gap-4">
-            <Header />
-            {children}
-            <Toaster richColors />
-          </div>
-        </body>
-      </UserContext>
+      <body className={inter.className + " min-h-screen flex flex-col"}>
+        {children}
+      </body>
     </html>
   );
 }

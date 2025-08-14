@@ -35,8 +35,18 @@
     @apply border-border;
   }
 
+  html {
+    @apply scroll-smooth;
+  }
+
   body {
-    @apply bg-background text-foreground;
+    @apply text-foreground;
+    background-repeat: no-repeat;
+    background-image: linear-gradient(
+      140deg,
+      rgba(48, 255, 186, 0.3) 10%,
+      rgba(44, 168, 10, 0.1) 50%
+    );
   }
 
   button {
@@ -51,6 +61,10 @@
     box-shadow: 5px 7px 15.2px -3px rgba(0, 0, 0, 0.25);
   }
 
+  #nav-list.active {
+    @apply opacity-100 scale-100;
+  }
+
   .down-shadow {
     @apply relative;
   }
@@ -58,14 +72,6 @@
     content: "";
     @apply absolute bottom-0 left-0 w-full h-[70px];
     background-image: linear-gradient(to top, #0000009c, transparent);
-  }
-
-  .title {
-    @apply text-primary font-bold text-2xl relative w-fit;
-  }
-  .title::after {
-    content: "";
-    @apply absolute top-full left-0 h-1 bg-primary w-[70%];
   }
 
   .the-shadow {
@@ -88,6 +94,7 @@
       @apply flex-col [&>*]:flex-1;
     }
   }
+
   @media (max-width: 400px) {
     .landing-text {
       @apply text-xl;
@@ -100,6 +107,11 @@
     }
   }
 
+  /* features section */
+  #features-list {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 0.9fr));
+  }
+
   /* dummy templates */
   @media (min-width: 661px) {
     .show-dummy {
@@ -109,6 +121,91 @@
   @media (max-width: 660px) {
     .hide-template-data {
       @apply !hidden;
+    }
+  }
+}
+
+@layer components {
+  @property --angle {
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+  }
+
+  .glow-border {
+    @apply relative rounded-sm;
+  }
+  .glow-border::after,
+  .glow-border::before {
+    content: "";
+    @apply absolute -z-10 rounded-sm;
+    background-image: conic-gradient(
+      from var(--angle),
+      rgb(48, 255, 186),
+      rgb(0, 255, 30),
+      rgb(37, 238, 60),
+      rgb(0, 255, 170),
+      rgb(44, 168, 10),
+      rgb(7, 85, 59)
+    );
+    animation: spinColor 7s infinite linear;
+  }
+
+  .glow-border::after {
+    inset: -4px;
+  }
+  .glow-border::before {
+    filter: blur(15px);
+    inset: -4px;
+  }
+
+  .contact-card {
+    @apply p-4 rounded-md block transition hover:scale-110;
+  }
+
+  .loading-text-animation {
+    @apply relative w-fit;
+  }
+
+  .loading-text-animation span {
+    @apply animate-pulse p-4;
+  }
+
+  .loading-text-animation::after {
+    content: "";
+    animation: rotate 1s linear infinite;
+    translate: -50% -50%;
+
+    @apply absolute left-1/2 top-1/2 w-full aspect-[1] border-2 border-r-transparent border-secondary rounded-full -z-10;
+  }
+
+  .title {
+    @apply text-primary font-bold text-2xl relative w-fit mb-5;
+  }
+  .title::after {
+    content: "";
+    @apply absolute top-full left-0 h-1 bg-primary w-[70%];
+  }
+
+  .homepage-section {
+    @apply my-10;
+  }
+  .homepage-section .title {
+    @apply text-center mx-auto text-3xl;
+  }
+  .homepage-section .title::after {
+    @apply left-1/2 -translate-x-1/2;
+  }
+
+  @keyframes spinColor {
+    to {
+      --angle: 360deg;
+    }
+  }
+
+  @keyframes rotate {
+    to {
+      rotate: 1turn;
     }
   }
 }

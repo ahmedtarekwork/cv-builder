@@ -1,5 +1,5 @@
 import type { FC } from "react";
-import type { TemplateDataType } from "@/app/new-cv/page";
+import type { TemplateDataType } from "@/app/(allPages)/cv-form/page";
 
 type Props = {
   dummy: {
