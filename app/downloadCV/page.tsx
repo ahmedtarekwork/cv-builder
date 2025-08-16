@@ -37,6 +37,8 @@ export default async function DownloadCVPage({
 }) {
   const headersList = await headers();
   const host = headersList.get("host");
+  const protocol = process.env.NODE_ENV === "production" ? "https" : "http";
+  const domain = `${protocol}://${host}`;
 
   const CVID = (await searchParams)?.CVID;
 
@@ -51,5 +53,5 @@ export default async function DownloadCVPage({
   const SelectedTemplate =
     templates[finalTemplateIndex as keyof typeof templates];
 
-  return <SelectedTemplate renderPDFViewer {...data} domain={host || ""} />;
+  return <SelectedTemplate renderPDFViewer {...data} domain={domain} />;
 }
