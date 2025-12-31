@@ -12,13 +12,17 @@ import {
   type FieldValues,
   type ArrayPath,
   type FieldArray,
-  type FieldArrayWithId,
   type UseFieldArrayRemove,
+  type UseFormRegister,
 } from "react-hook-form";
 
 // components
 // shadcn
 import { Button } from "@/components/ui/button";
+
+// types
+import type { InputsTypes } from "../../../page";
+import type { Job, Project, Skill } from "@/lib/types";
 
 type Props<T extends FieldValues> = {
   control: Control<T, any>;
@@ -27,11 +31,26 @@ type Props<T extends FieldValues> = {
   addBtnContent: string;
   initialValue: Record<string, string>;
   ListItem: (
-    field: FieldArrayWithId<T, ArrayPath<T>, "id">,
+    fieldId: string,
     i: number,
     remove: UseFieldArrayRemove
   ) => ReactNode;
   errorMsg?: string;
+};
+
+type RegisterFn = UseFormRegister<InputsTypes>;
+
+export type InputsSectionListItemProps = {
+  i: number;
+  remove: UseFieldArrayRemove;
+  register: RegisterFn;
+};
+
+export type SectionsProps<T extends Job | Skill | Project> = {
+  control: Control<InputsTypes, unknown>;
+  register: RegisterFn;
+  errorMsg?: string;
+  initialValue: T;
 };
 
 const InputsSection = <T extends FieldValues>({
@@ -49,14 +68,17 @@ const InputsSection = <T extends FieldValues>({
   });
 
   return (
-    <div className="bg-white space-y-4 border-2 rounded-md border-primary p-3 flex-1 flex flex-col">
+    <div
+      aria-label={name}
+      className="bg-white space-y-4 border-2 rounded-md border-primary p-3 flex-1 flex flex-col"
+    >
       <h3 className="text-secondary font-semibold text-xl">{title}</h3>
 
       <ul className="space-y-4 inputs-section-list">
-        {fields.map((field, i) => ListItem(field, i, remove))}
+        {fields.map((field, i) => ListItem(field.id, i, remove))}
       </ul>
 
-      <div className="!mt-auto  pt-4">
+      <div className="!mt-auto pt-4">
         <Button
           className="w-full"
           onClick={() => append(initialValue as FieldArray<T, ArrayPath<T>>)}
@@ -66,7 +88,15 @@ const InputsSection = <T extends FieldValues>({
         </Button>
       </div>
 
-      {errorMsg && <p className="text-destructive">{errorMsg}</p>}
+      {errorMsg && (
+        <p
+          data-testid={`${name}-multi-inputs-section-error-msg-holder`}
+          title="multi-inputs-section-error-msg-holder"
+          className="text-destructive"
+        >
+          {errorMsg}
+        </p>
+      )}
     </div>
   );
 };

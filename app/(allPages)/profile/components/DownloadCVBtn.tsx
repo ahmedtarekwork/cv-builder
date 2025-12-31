@@ -1,4 +1,6 @@
 // components
+import Spinner from "@/components/Spinner";
+
 // shadcn
 import { Button } from "@/components/ui/button";
 
@@ -48,11 +50,7 @@ const DownloadCVBtn = ({
         fileName="CV.pdf"
       >
         {({ loading }) => {
-          return loading ? (
-            <div className="animate-spin size-4 border-2 border-white border-r-transparent rounded-full" />
-          ) : (
-            <FaDownload size={24} />
-          );
+          return loading ? <Spinner /> : <FaDownload size={24} />;
         }}
       </PDFDownloadLink>
     </Button>

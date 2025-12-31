@@ -8,12 +8,12 @@ type Props = {
   };
   Template: FC<TemplateDataType | (TemplateDataType & { imgSrc?: string })>;
   templateData?: TemplateDataType | (TemplateDataType & { imgSrc?: string });
-  turnDummyInSmallScreens?: boolean;
+  ActiveDummyInSmallScreens?: boolean;
 };
 
 export type TheTemplateProps = Pick<
   Props,
-  "templateData" | "turnDummyInSmallScreens"
+  "templateData" | "ActiveDummyInSmallScreens"
 > & {
   dummy: Props["dummy"]["value"];
 };
@@ -22,7 +22,7 @@ const TemplateHolder = ({
   dummy,
   Template,
   templateData,
-  turnDummyInSmallScreens = false,
+  ActiveDummyInSmallScreens = false,
 }: Props) => {
   if (dummy.value) return dummy.DummyComponent;
 
@@ -82,7 +82,7 @@ const TemplateHolder = ({
     imgSrc: "/person.svg",
   };
 
-  return turnDummyInSmallScreens ? (
+  return ActiveDummyInSmallScreens ? (
     <>
       <div className="hide-template-data h-full flex flex-col flex-1">
         {<Template {...(templateData || initData)} />}

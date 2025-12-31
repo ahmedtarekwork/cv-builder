@@ -109,7 +109,7 @@ const TheTemplate = ({
               </div>
             )}
 
-            {!!skills.length && (
+            {!!skills?.length && (
               <div className="py-2">
                 <h3 className="font-bold text-slate-600 text-2xl border-b w-fit mx-auto border-b-1 border-slate-800">
                   Skills
@@ -222,7 +222,7 @@ const Dummy = () => {
 const TemplateThree = ({
   dummy = true,
   templateData,
-  turnDummyInSmallScreens,
+  ActiveDummyInSmallScreens,
 }: TheTemplateProps) => {
   return (
     <TemplateHolder
@@ -232,7 +232,7 @@ const TemplateThree = ({
       }}
       templateData={templateData}
       Template={TheTemplate}
-      turnDummyInSmallScreens={turnDummyInSmallScreens}
+      ActiveDummyInSmallScreens={ActiveDummyInSmallScreens}
     />
   );
 };

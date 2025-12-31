@@ -95,7 +95,7 @@ const OldCVs = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
-  if (isLoading)
+  if (isLoading) {
     return (
       <p
         ref={loadingElRef}
@@ -104,8 +104,9 @@ const OldCVs = () => {
         <span>Loading Your CVs...</span>
       </p>
     );
+  }
 
-  if (!userTemplates.length)
+  if (!userTemplates.length) {
     return (
       <>
         <Image
@@ -115,11 +116,13 @@ const OldCVs = () => {
           height={200}
           className="mx-auto w-full max-w-full h-[400px] object-contain aspect-[1]"
         />
+
         <p className="text-primary font-bold text-2xl mt-2 text-center">
           No CVs has been created to show!
         </p>
       </>
     );
+  }
 
   return (
     <div className="mt-4">
@@ -212,7 +215,7 @@ const OldCVs = () => {
                   <SelectedTemplate
                     dummy={false}
                     templateData={data}
-                    turnDummyInSmallScreens
+                    ActiveDummyInSmallScreens
                   />
                 </div>
               </li>

@@ -96,30 +96,34 @@ const TheTemplate = ({
         </ul>
       </div>
 
-      <div>
-        <h2 className="border-b-[3px] border-slate-600 font-bold text-2xl text-slate-600 mx-auto">
-          Skills
-        </h2>
-        <ul className="mt-2 text-left">
-          {skills.map(({ skill }, i) => (
-            <li key={i}>{skill}</li>
-          ))}
-        </ul>
-      </div>
+      {!!skills?.length && (
+        <div>
+          <h2 className="border-b-[3px] border-slate-600 font-bold text-2xl text-slate-600 mx-auto">
+            Skills
+          </h2>
+          <ul className="mt-2 text-left">
+            {skills.map(({ skill }, i) => (
+              <li key={i}>{skill}</li>
+            ))}
+          </ul>
+        </div>
+      )}
 
-      <div>
-        <h2 className="border-b-[3px] border-slate-600 font-bold text-2xl text-slate-600 mx-auto">
-          Projects
-        </h2>
-        <ul className="mt-2 text-left space-y-4">
-          {projects.map(({ name, description }, i) => (
-            <li key={i}>
-              <h3 className="font-bold text-slate-900">{name}</h3>
-              <p>{description}</p>
-            </li>
-          ))}
-        </ul>
-      </div>
+      {!!projects?.length && (
+        <div>
+          <h2 className="border-b-[3px] border-slate-600 font-bold text-2xl text-slate-600 mx-auto">
+            Projects
+          </h2>
+          <ul className="mt-2 text-left space-y-4">
+            {projects.map(({ name, description }, i) => (
+              <li key={i}>
+                <h3 className="font-bold text-slate-900">{name}</h3>
+                <p>{description}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   );
 };
@@ -168,7 +172,7 @@ const Dummy = () => {
 const TemplateTwo = ({
   dummy = true,
   templateData,
-  turnDummyInSmallScreens,
+  ActiveDummyInSmallScreens,
 }: TheTemplateProps) => {
   return (
     <TemplateHolder
@@ -178,7 +182,7 @@ const TemplateTwo = ({
       }}
       templateData={templateData}
       Template={TheTemplate}
-      turnDummyInSmallScreens={turnDummyInSmallScreens}
+      ActiveDummyInSmallScreens={ActiveDummyInSmallScreens}
     />
   );
 };

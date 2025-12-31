@@ -53,7 +53,7 @@ const TheTemplate = ({
           {BehanceLink && <p>Behance link: {BehanceLink}</p>}
         </div>
 
-        {!!skills.length && (
+        {!!skills?.length && (
           <div className="text-left space-y-3">
             <h2 className="font-bold border-b-2 text-xl border-white">
               Skills
@@ -82,7 +82,7 @@ const TheTemplate = ({
           <p className="text-left">{education}</p>
         </div>
 
-        {!!projects.length && (
+        {!!projects?.length && (
           <div className="p-2 space-y-4 flex-1">
             <h2 className="font-bold border-b-2 text-2xl border-slate-600">
               Projects
@@ -98,7 +98,7 @@ const TheTemplate = ({
           </div>
         )}
 
-        {!!jobs.length && (
+        {!!jobs?.length && (
           <div className="p-2 space-y-4 flex-1">
             <h2 className="font-bold border-b-2 text-2xl border-slate-600">
               Experience
@@ -168,7 +168,7 @@ const Dummy = () => {
 const TemplateOne = ({
   dummy = true,
   templateData,
-  turnDummyInSmallScreens,
+  ActiveDummyInSmallScreens,
 }: TheTemplateProps) => {
   return (
     <TemplateHolder
@@ -177,7 +177,7 @@ const TemplateOne = ({
         value: dummy,
         DummyComponent: <Dummy />,
       }}
-      turnDummyInSmallScreens={turnDummyInSmallScreens}
+      ActiveDummyInSmallScreens={ActiveDummyInSmallScreens}
       templateData={templateData as TemplateDataType}
     />
   );
